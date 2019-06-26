@@ -1,0 +1,5 @@
+<suite name="MainTestSuite" thread-count="3" parallel="tests">
+    <listeners>
+        <listener class-name="com.karpuk.clashtrack.core.listener.TestListener"/>
+    </listeners>
+</suite>

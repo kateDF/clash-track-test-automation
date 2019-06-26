@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>clashtrack-at-core</module>
+        <module>clashtrack-at-ui</module>
     </modules>
 
     <properties>
@@ -30,6 +31,11 @@
             <dependency>
                 <artifactId>clashtrack-at-core</artifactId>
                 <groupId>com.karpuk.clashtrack.core</groupId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <artifactId>clashtrack-at-ui</artifactId>
+                <groupId>com.karpuk.clashtrack.ui</groupId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
