@@ -2,4 +2,14 @@
     <listeners>
         <listener class-name="com.karpuk.clashtrack.core.listener.TestListener"/>
     </listeners>
+    <test name="SingInTest">
+        <classes>
+            <class name="com.karpuk.clashtrack.ui.test.SignInTest"/>
+        </classes>
+    </test>
+    <test name="BasesCollectionTest">
+        <classes>
+            <class name="com.karpuk.clashtrack.ui.test.BasesCollectionTest"/>
+        </classes>
+    </test>
 </suite>
