@@ -12,4 +12,9 @@ public class Waiters {
                 .until(ExpectedConditions.visibilityOfAllElements(element));
     }
 
+    public static void waitVisibilityAndClick(WebElement element) {
+        waitForVisibility(element);
+        element.click();
+    }
+
 }

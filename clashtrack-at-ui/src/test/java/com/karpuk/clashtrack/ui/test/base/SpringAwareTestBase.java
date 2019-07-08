@@ -1,6 +1,7 @@
 package com.karpuk.clashtrack.ui.test.base;
 
 import com.karpuk.clashtrack.ui.core.driver.WebDriverManager;
+import com.karpuk.clashtrack.ui.core.page.BasesCollectionPage;
 import com.karpuk.clashtrack.ui.core.page.DashboardPage;
 import com.karpuk.clashtrack.ui.core.page.HomePage;
 import com.karpuk.clashtrack.ui.test.context.AccountsContext;
@@ -22,6 +23,8 @@ public class SpringAwareTestBase extends AbstractTestNGSpringContextTests {
     protected HomePage homePage;
     @Autowired
     protected DashboardPage dashboardPage;
+    @Autowired
+    protected BasesCollectionPage basesCollectionPage;
 
     @Autowired
     protected SignInService signInService;
