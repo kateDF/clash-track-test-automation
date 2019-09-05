@@ -12,4 +12,9 @@
             <class name="com.karpuk.clashtrack.ui.test.BasesCollectionTest"/>
         </classes>
     </test>
+    <test name="TroopCostCalculatorTest">
+        <classes>
+            <class name="com.karpuk.clashtrack.ui.test.TroopCostCalculationTest"/>
+        </classes>
+    </test>
 </suite>

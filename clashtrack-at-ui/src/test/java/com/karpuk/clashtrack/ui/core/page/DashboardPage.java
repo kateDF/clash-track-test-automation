@@ -21,6 +21,9 @@ public class DashboardPage extends BasePage {
     @FindBy(xpath = "//i[@class='fa fa-map-signs']/ancestor::a")
     private WebElement clashOfClansBasesButton;
 
+    @FindBy(xpath = "//i[@class='fa fa-sliders']/ancestor::a")
+    private WebElement troopCalculatorButton;
+
     public String getCurrentUseName() {
         waitForVisibility(currentUserNameTitle);
         String currentUserName = currentUserNameTitle.getText();
@@ -32,6 +35,12 @@ public class DashboardPage extends BasePage {
         openToolsList();
         logInfo("Open bases collection page");
         waitVisibilityAndClick(clashOfClansBasesButton);
+    }
+
+    public void openTroopCalculator() {
+        openToolsList();
+        logInfo("Open troop cost calculator");
+        waitVisibilityAndClick(troopCalculatorButton);
     }
 
     private void openToolsList() {

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.karpuk.clashtrack.core.listener.TestListener.logError;
 import static com.karpuk.clashtrack.core.listener.TestListener.logInfo;
 
 public class BasesCollectionPage extends BasePage {
@@ -28,6 +29,8 @@ public class BasesCollectionPage extends BasePage {
         if (level == 0) {
             logInfo("Select all levels");
             allLevelsButton.click();
+        } else if (level == 1 || level == 2) {
+            logError("No bases layouts existing with selected level");
         } else {
             selectLevel(level.toString());
         }

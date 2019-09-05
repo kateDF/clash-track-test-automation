@@ -1,9 +1,6 @@
 package com.karpuk.clashtrack.ui.test.context;
 
-import com.karpuk.clashtrack.ui.core.page.AccountsGooglePage;
-import com.karpuk.clashtrack.ui.core.page.BasesCollectionPage;
-import com.karpuk.clashtrack.ui.core.page.DashboardPage;
-import com.karpuk.clashtrack.ui.core.page.HomePage;
+import com.karpuk.clashtrack.ui.core.page.*;
 import com.karpuk.clashtrack.ui.test.service.SignInService;
 import org.assertj.core.api.SoftAssertions;
 import org.springframework.context.annotation.Bean;
@@ -50,6 +47,12 @@ public class ConfigurationContext {
     @Scope("prototype")
     public BasesCollectionPage getBasesCollectionPage() {
         return new BasesCollectionPage();
+    }
+
+    @Bean
+    @Scope("prototype")
+    public TroopCostCalculatorPage getTroopCostCalculatorPage() {
+        return new TroopCostCalculatorPage();
     }
 
     @Bean
