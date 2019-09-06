@@ -56,7 +56,7 @@ public class TroopCostCalculatorPage extends BasePage {
     }
 
     public int getAvailableQuantityOfLightBarracks() {
-        return Integer.parseInt(availableQuantityLightBarracks.getText());
+        return Integer.parseInt(availableQuantityLightBarracks.getText().replace("−", "-"));
     }
 
 }

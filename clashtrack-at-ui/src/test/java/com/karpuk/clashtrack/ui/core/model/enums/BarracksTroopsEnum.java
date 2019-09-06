@@ -7,7 +7,7 @@ public enum BarracksTroopsEnum {
     GIANT(5),
     GOBLIN(1),
     WALL_BREAKER(2),
-    BALLON(5),
+    BALLOON(5),
     WIZARD(4),
     HEALER(14),
     DRAGON(20),
