@@ -1,6 +1,6 @@
 package com.karpuk.clashtrack.ui.core.page;
 
-import com.karpuk.clashtrack.ui.core.model.enums.BarracksTroopsEnum;
+import com.karpuk.clashtrack.ui.core.model.enums.LightBarracksTroopsEnum;
 import com.karpuk.clashtrack.ui.core.model.enums.TownHallLevelsEnum;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -46,10 +46,10 @@ public class TroopCostCalculatorPage extends BasePage {
         new Select(armyCampDropDown).selectByValue(capacity.toString());
     }
 
-    public void selectTroopsCapacityByTypes(BarracksTroopsEnum type, Integer quantity) {
-        logInfo("Select " + type.toString() + " with quantity: " + quantity + ". Capacity executing: " + type.getArmySpace() * quantity);
+    public void selectTroopsCapacityByTypes(LightBarracksTroopsEnum type, Integer quantity) {
+        logInfo("Select " + type.getTroopType() + " with quantity: " + quantity + ". Capacity executing: " + type.getArmySpace() * quantity);
         for (WebElement input : quantityInputs) {
-            if (input.getAttribute("id").equalsIgnoreCase(type.toString())) {
+            if (input.getAttribute("id").equalsIgnoreCase(type.getTroopType())) {
                 input.sendKeys(quantity.toString());
             }
         }
