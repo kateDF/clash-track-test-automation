@@ -10,6 +10,7 @@ import java.util.List;
 
 import static com.karpuk.clashtrack.core.listener.TestListener.logError;
 import static com.karpuk.clashtrack.core.listener.TestListener.logInfo;
+import static com.karpuk.clashtrack.ui.core.util.Waiters.waitAndClickJS;
 import static com.karpuk.clashtrack.ui.core.util.Waiters.waitForVisibility;
 
 public class TroopCostCalculatorPage extends BasePage {
@@ -30,7 +31,7 @@ public class TroopCostCalculatorPage extends BasePage {
     private WebElement errorLightBarracks;
 
     @FindBy(xpath = "//span[@data-reset='light' and @data-scope='quantity']/i")
-    private WebElement resetQuantityLightBarracks;
+    private WebElement resetQuantityLightBarracksButton;
 
     @FindBy(xpath = "//span[@class='icon-favorite']")
     private WebElement saveArmyCompositionButton;
@@ -40,6 +41,9 @@ public class TroopCostCalculatorPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='favorite__capacity']")
     private WebElement savedCompositionCapacity;
+
+    @FindBy(xpath = "//span[@class='button js-favorite-load']")
+    private WebElement loadArmyCompositionButton;
 
     public void selectTownHallLevel(TownHallLevelsEnum levelEnum) {
         Integer level = levelEnum.getValue();
@@ -78,22 +82,28 @@ public class TroopCostCalculatorPage extends BasePage {
         return errorLightBarracks.getText();
     }
 
-    public void resetQuantityLightBarracks() {
+    public void resetQuantityInLightBarracks() {
         logInfo("Reset quantity in light barracks");
-        resetQuantityLightBarracks.click();
+        waitAndClickJS(resetQuantityLightBarracksButton);
     }
 
     public void saveArmyComposition() {
         logInfo("Save army composition");
         saveArmyCompositionButton.click();
+        waitForVisibility(savedCompositionCapacity);
     }
 
-    public String getCapacityResultInLightBarracks(){
+    public String getCapacityResultInLightBarracks() {
         return capacityResultInLightBarracks.getText();
     }
 
-    public String getSavedCompositionCapacity(){
+    public String getSavedCompositionCapacity() {
         return savedCompositionCapacity.getText();
+    }
+
+    public void loadArmyComposition() {
+        logInfo("Load army composition");
+        loadArmyCompositionButton.click();
     }
 
 }

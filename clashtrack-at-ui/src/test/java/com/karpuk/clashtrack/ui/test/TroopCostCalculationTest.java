@@ -56,7 +56,7 @@ public class TroopCostCalculationTest extends BaseTestData {
         signInService.signInWithGoogleAccount(user);
         dashboardPage.openTroopCalculator();
         troopCalculationService.selectTroopsInLightBarracksCalculator(armyCapacity, townHallLevels, troopType, quantity);
-        troopCostCalculatorPage.resetQuantityLightBarracks();
+        troopCostCalculatorPage.resetQuantityInLightBarracks();
         softAssert.assertThat(troopCostCalculatorPage.getAvailableQuantityOfLightBarracks())
                 .as("Verify quantity reset in Light Barracks").isEqualTo(armyCapacity);
         softAssert.assertAll();
@@ -75,5 +75,19 @@ public class TroopCostCalculationTest extends BaseTestData {
         softAssert.assertAll();
     }
 
+    @Test(dataProvider = "data-provider-light-barracks")
+    void testLoadArmyCompositionLightBarracks(int armyCapacity, TownHallLevelsEnum townHallLevels, LightBarracksTroopsEnum troopType, int quantity, int capacityExecuting) {
+        logInfo("Verify loading of the saved army composition.");
+        homePage.navigate(baseUrl);
+        signInService.signInWithGoogleAccount(user);
+        dashboardPage.openTroopCalculator();
+        troopCalculationService.selectTroopsInLightBarracksCalculator(armyCapacity, townHallLevels, troopType, quantity);
+        troopCostCalculatorPage.saveArmyComposition();
+        troopCostCalculatorPage.resetQuantityInLightBarracks();
+        troopCostCalculatorPage.loadArmyComposition();
+        softAssert.assertThat(troopCostCalculatorPage.getCapacityResultInLightBarracks())
+                .as("Verify capacity in loaded army").contains(troopCostCalculatorPage.getSavedCompositionCapacity());
+        softAssert.assertAll();
+    }
 
 }
