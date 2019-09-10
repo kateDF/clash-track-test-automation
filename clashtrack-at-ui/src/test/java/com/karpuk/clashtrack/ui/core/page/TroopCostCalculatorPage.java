@@ -29,6 +29,9 @@ public class TroopCostCalculatorPage extends BasePage {
     @FindBy(xpath = "//span[contains(@class,' message_negative') and @id='light-exceeded']")
     private WebElement errorLightBarracks;
 
+    @FindBy(xpath = "//span[@data-reset='light' and @data-scope='quantity']/i")
+    private WebElement resetQuantityLightBarracks;
+
     public void selectTownHallLevel(TownHallLevelsEnum levelEnum) {
         Integer level = levelEnum.getValue();
         if (level > 0 && level < 12) {
@@ -64,6 +67,11 @@ public class TroopCostCalculatorPage extends BasePage {
 
     public String getErrorMessageLightBarracks() {
         return errorLightBarracks.getText();
+    }
+
+    public void resetQuantityLightBarracks() {
+        logInfo("Reset quantity in light barracks");
+        resetQuantityLightBarracks.click();
     }
 
 }
