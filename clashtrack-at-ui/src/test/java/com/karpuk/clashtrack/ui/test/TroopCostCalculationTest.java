@@ -31,9 +31,7 @@ public class TroopCostCalculationTest extends BaseTestData {
         homePage.navigate(baseUrl);
         signInService.signInWithGoogleAccount(user);
         dashboardPage.openTroopCalculator();
-        troopCostCalculatorPage.selectTownHallLevel(townHallLevels);
-        troopCostCalculatorPage.selectArmyCapacity(armyCapacity);
-        troopCostCalculatorPage.selectTroopsCapacityByTypes(troopType, quantity);
+        troopCalculationService.selectTroopsInLightBarracksCalculator(armyCapacity, townHallLevels, troopType, quantity);
         softAssert.assertThat(troopCostCalculatorPage.getAvailableQuantityOfLightBarracks())
                 .as("Verify available quantity").isEqualTo(armyCapacity - capacityExecuting);
         softAssert.assertAll();
@@ -45,9 +43,7 @@ public class TroopCostCalculationTest extends BaseTestData {
         homePage.navigate(baseUrl);
         signInService.signInWithGoogleAccount(user);
         dashboardPage.openTroopCalculator();
-        troopCostCalculatorPage.selectTownHallLevel(townHallLevels);
-        troopCostCalculatorPage.selectArmyCapacity(armyCapacity);
-        troopCostCalculatorPage.selectTroopsCapacityByTypes(troopType, quantity);
+        troopCalculationService.selectTroopsInLightBarracksCalculator(armyCapacity, townHallLevels, troopType, quantity);
         softAssert.assertThat(troopCostCalculatorPage.getErrorMessageLightBarracks())
                 .as("Verify error message in Light Barracks calculator").contains("Exceeded training capacity of the Barracks");
         softAssert.assertAll();
@@ -59,9 +55,7 @@ public class TroopCostCalculationTest extends BaseTestData {
         homePage.navigate(baseUrl);
         signInService.signInWithGoogleAccount(user);
         dashboardPage.openTroopCalculator();
-        troopCostCalculatorPage.selectTownHallLevel(townHallLevels);
-        troopCostCalculatorPage.selectArmyCapacity(armyCapacity);
-        troopCostCalculatorPage.selectTroopsCapacityByTypes(troopType, quantity);
+        troopCalculationService.selectTroopsInLightBarracksCalculator(armyCapacity, townHallLevels, troopType, quantity);
         troopCostCalculatorPage.resetQuantityLightBarracks();
         softAssert.assertThat(troopCostCalculatorPage.getAvailableQuantityOfLightBarracks())
                 .as("Verify quantity reset in Light Barracks").isEqualTo(armyCapacity);
