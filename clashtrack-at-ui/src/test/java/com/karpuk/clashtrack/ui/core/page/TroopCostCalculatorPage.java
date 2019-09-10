@@ -32,6 +32,15 @@ public class TroopCostCalculatorPage extends BasePage {
     @FindBy(xpath = "//span[@data-reset='light' and @data-scope='quantity']/i")
     private WebElement resetQuantityLightBarracks;
 
+    @FindBy(xpath = "//span[@class='icon-favorite']")
+    private WebElement saveArmyCompositionButton;
+
+    @FindBy(xpath = "//td[@class='result js-col-light-quantity']/span[@class='text-middle']")
+    private WebElement capacityResultInLightBarracks;
+
+    @FindBy(xpath = "//div[@class='favorite__capacity']")
+    private WebElement savedCompositionCapacity;
+
     public void selectTownHallLevel(TownHallLevelsEnum levelEnum) {
         Integer level = levelEnum.getValue();
         if (level > 0 && level < 12) {
@@ -72,6 +81,19 @@ public class TroopCostCalculatorPage extends BasePage {
     public void resetQuantityLightBarracks() {
         logInfo("Reset quantity in light barracks");
         resetQuantityLightBarracks.click();
+    }
+
+    public void saveArmyComposition() {
+        logInfo("Save army composition");
+        saveArmyCompositionButton.click();
+    }
+
+    public String getCapacityResultInLightBarracks(){
+        return capacityResultInLightBarracks.getText();
+    }
+
+    public String getSavedCompositionCapacity(){
+        return savedCompositionCapacity.getText();
     }
 
 }
