@@ -17,7 +17,7 @@ public class WebDriverManager {
 
     public enum BrowserType {
         CHROME,
-        FIREFOX,
+        FIREFOX
     }
 
     public static WebDriver getInstance() {
@@ -39,6 +39,8 @@ public class WebDriverManager {
                 System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
                 driver = new FirefoxDriver();
                 break;
+            default:
+                throw new UnsupportedOperationException("Provided browser type '" + ConfigWebDriver.getBrowserType() + "' is not supported");
         }
         maximize(driver);
         setImplicitlyWait(driver);

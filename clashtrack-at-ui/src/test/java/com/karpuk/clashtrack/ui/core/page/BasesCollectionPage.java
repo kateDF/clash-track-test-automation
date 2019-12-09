@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.karpuk.clashtrack.core.listener.TestListener.logError;
 import static com.karpuk.clashtrack.core.listener.TestListener.logInfo;
@@ -62,20 +63,14 @@ public class BasesCollectionPage extends BasePage {
     public boolean matchLevelsResults(TownHallLevelsEnum expectedLevelEnum) {
         List<String> actualLevels = getListOfActualLevels();
         String expectedLevel = expectedLevelEnum.toString();
-        for (String act : actualLevels) {
-            if (!expectedLevel.equalsIgnoreCase(act)) {
-                return false;
-            }
-        }
-        return true;
+        return actualLevels.stream()
+                .allMatch(expectedLevel::equalsIgnoreCase);
     }
 
     private List<String> getLevelLabels() {
-        List<String> actualLabels = new ArrayList<>();
-        for (WebElement label : baseLevelLabels) {
-            actualLabels.add(label.getText());
-        }
-        return actualLabels;
+        return baseLevelLabels.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 
 }

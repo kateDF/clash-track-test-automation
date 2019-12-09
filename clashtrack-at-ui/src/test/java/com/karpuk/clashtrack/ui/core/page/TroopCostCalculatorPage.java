@@ -46,16 +46,16 @@ public class TroopCostCalculatorPage extends BasePage {
     private WebElement loadArmyCompositionButton;
 
     public void selectTownHallLevel(TownHallLevelsEnum levelEnum) {
-        Integer level = levelEnum.getValue();
+        int level = levelEnum.getValue();
         if (level > 0 && level < 12) {
             logInfo("Select town hall level: " + level);
-            for (WebElement levelActual : levelButtons) {
-                if (Integer.parseInt(levelActual.getText()) == level) {
-                    levelActual.click();
-                }
-            }
+            levelButtons.stream()
+                    .filter(levelActual -> Integer.parseInt(levelActual.getText()) == level)
+                    .findFirst()
+                    .get()
+                    .click();
         } else {
-            logError("Do not support town hall level");
+            logError("Unsupported town hall level");
         }
     }
 
