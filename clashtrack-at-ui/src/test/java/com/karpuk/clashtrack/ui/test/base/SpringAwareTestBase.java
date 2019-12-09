@@ -35,7 +35,7 @@ public class SpringAwareTestBase extends AbstractTestNGSpringContextTests {
     @Autowired
     protected TroopCalculationService troopCalculationService;
 
-    @Value("${com.clashtrack.application.url}${com.clashtrack.application.url.lang.endpoint}")
+    @Value("${application.url}${application.url.lang}")
     protected String baseUrl;
 
     @Autowired

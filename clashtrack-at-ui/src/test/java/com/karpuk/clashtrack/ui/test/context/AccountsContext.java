@@ -17,10 +17,10 @@ public class AccountsContext {
     }
 
     @Bean
-    public User mainUser(@Value("${com.clashtrack.test.user}") String email,
-                         @Value("${com.clashtrack.test.password}") String password,
-                         @Value("${com.clashtrack.test.name}") String name,
-                         @Value("${com.clashtrack.test.name}") String lastName) {
+    public User mainUser(@Value("${test.user}") String email,
+                         @Value("${test.password}") String password,
+                         @Value("${test.name}") String name,
+                         @Value("${test.lastName}") String lastName) {
         return new User(email, password, name, lastName);
     }
 
