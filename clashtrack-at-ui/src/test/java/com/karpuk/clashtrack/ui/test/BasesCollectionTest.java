@@ -20,4 +20,56 @@ public class BasesCollectionTest extends BaseTestData {
         softAssert.assertAll();
     }
 
+    @Test()
+    void testOpenExactLevelBase() {
+        logInfo("Verify level of chosen base layout page.");
+        homePage.navigate(baseUrl);
+        signInService.signInWithGoogleAccount(user);
+        dashboardPage.openBasesCollection();
+        basesCollectionPage.selectTownHallLevel(TownHallLevelsEnum.TH7);
+        basesCollectionPage.openFirstBaseLayout();
+        softAssert.assertThat(baseLayoutPage.getTHLevel())
+                .as("Verify town hall level").isEqualToIgnoringCase(TownHallLevelsEnum.TH7.toString());
+        softAssert.assertAll();
+    }
+
+    @Test()
+    void testReturnToListFromExactBase() {
+        logInfo("Verify returning to List of Bases.");
+        homePage.navigate(baseUrl);
+        signInService.signInWithGoogleAccount(user);
+        dashboardPage.openBasesCollection();
+        basesCollectionPage.openFirstBaseLayout();
+        baseLayoutPage.backToBasesList();
+        softAssert.assertThat(basesCollectionPage.getSectionTitle())
+                .as("Verify section title").isEqualTo("List of Clash of clans bases");
+        softAssert.assertAll();
+    }
+
+    @Test()
+    void testCheckTypeOfExactBase() {
+        logInfo("Verify base type.");
+        homePage.navigate(baseUrl);
+        signInService.signInWithGoogleAccount(user);
+        dashboardPage.openBasesCollection();
+        String firstBaseType = basesCollectionPage.getFirstBaseType();
+        basesCollectionPage.openFirstBaseLayout();
+        softAssert.assertThat(baseLayoutPage.getBaseType())
+                .as("Verify type of base").isSubstringOf(firstBaseType);
+        softAssert.assertAll();
+    }
+
+    @Test()
+    void testCheckLevelProposedBases() {
+        logInfo("Verify level of chosen base layout page.");
+        homePage.navigate(baseUrl);
+        signInService.signInWithGoogleAccount(user);
+        dashboardPage.openBasesCollection();
+        basesCollectionPage.selectTownHallLevel(TownHallLevelsEnum.TH6);
+        basesCollectionPage.openFirstBaseLayout();
+        softAssert.assertThat(baseLayoutPage.matchLevelsOfProposedBases(TownHallLevelsEnum.TH6))
+                .as("Verify levels").isTrue();
+        softAssert.assertAll();
+    }
+
 }

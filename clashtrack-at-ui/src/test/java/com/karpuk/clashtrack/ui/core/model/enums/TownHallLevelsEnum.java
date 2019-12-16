@@ -14,7 +14,8 @@ public enum TownHallLevelsEnum {
     TH9(9),
     TH10(10),
     TH11(11),
-    TH12(12);
+    TH12(12),
+    TH13(13);
 
     private int value;
 

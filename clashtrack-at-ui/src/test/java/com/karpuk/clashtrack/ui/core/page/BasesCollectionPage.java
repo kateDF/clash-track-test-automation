@@ -25,6 +25,15 @@ public class BasesCollectionPage extends BasePage {
     @FindBy(xpath = "//a[@rel='next']")
     private List<WebElement> nextBasesButton;
 
+    @FindBy(xpath = "//div[@class='row clan-website-list']//a")
+    private List<WebElement> basesLayoutsElements;
+
+    @FindBy(xpath = "//section[@id='content']/h2")
+    private WebElement sectionTitle;
+
+    @FindBy(xpath = "//div[contains(@class,'col-xs-6')]//span[@class='label label-default']")
+    private List<WebElement> basesTypeLabels;
+
     public void selectTownHallLevel(TownHallLevelsEnum levelEnum) {
         Integer level = levelEnum.getValue();
         if (level == 0) {
@@ -65,6 +74,28 @@ public class BasesCollectionPage extends BasePage {
         String expectedLevel = expectedLevelEnum.toString();
         return actualLevels.stream()
                 .allMatch(expectedLevel::equalsIgnoreCase);
+    }
+
+    public void openFirstBaseLayout() {
+        logInfo("Open first base founded");
+        if (!basesLayoutsElements.isEmpty()) {
+            basesLayoutsElements.get(0).click();
+        } else {
+            throw new UnsupportedOperationException("No bases with selected level");
+        }
+    }
+
+    public String getSectionTitle() {
+        return sectionTitle.getText();
+    }
+
+
+    public String getFirstBaseType() {
+        if (!basesTypeLabels.isEmpty()) {
+            return basesTypeLabels.get(0).getText();
+        } else {
+            throw new UnsupportedOperationException("No bases with selected level");
+        }
     }
 
     private List<String> getLevelLabels() {

@@ -58,6 +58,12 @@ public class ConfigurationContext {
 
     @Bean
     @Scope("prototype")
+    public BaseLayoutPage getBaseLayoutPage() {
+        return new BaseLayoutPage();
+    }
+
+    @Bean
+    @Scope("prototype")
     public SignInService getSignInService() {
         return new SignInService();
     }
