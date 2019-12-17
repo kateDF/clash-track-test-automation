@@ -45,6 +45,18 @@ public class TroopCostCalculatorPage extends BasePage {
     @FindBy(xpath = "//span[@class='button js-favorite-load']")
     private WebElement loadArmyCompositionButton;
 
+    @FindBy(xpath = "//span[not(@style='display: none')]/span[@class='help-link js-help-link']")
+    private List<WebElement> helpToolTips;
+
+    @FindBy(xpath = "//div[@class='help-tooltip help-tooltip_visible']")
+    private List<WebElement> helpToolTipsDisplayed;
+
+    @FindBy(xpath = "//h2[@id='favorites-anchor']/span[@class='help-link js-help-link']")
+    private WebElement saveArmyHelpToolTip;
+
+    @FindBy(xpath = "//div[@class='js-light-object']/h2")
+    private WebElement lightBarracksTitle;
+
     public void selectTownHallLevel(TownHallLevelsEnum levelEnum) {
         int level = levelEnum.getValue();
         if (level > 0 && level < 12) {
@@ -104,6 +116,31 @@ public class TroopCostCalculatorPage extends BasePage {
     public void loadArmyComposition() {
         logInfo("Load army composition");
         loadArmyCompositionButton.click();
+    }
+
+    public void openFirstHelpToolTip() {
+        logInfo("Open first help tooltip");
+        if (!helpToolTips.isEmpty()) {
+            helpToolTips.get(0).click();
+        }
+    }
+
+    public boolean isHelpToolTipPresented() {
+        return !helpToolTipsDisplayed.isEmpty();
+    }
+
+    public String getFirstHelpToolTipPresented() {
+        waitForVisibility(helpToolTipsDisplayed.get(0));
+        return helpToolTipsDisplayed.get(0).getText();
+    }
+
+    public void openSaveArmyHelpToolTip() {
+        logInfo("Open help tooltip in Save Army block");
+        saveArmyHelpToolTip.click();
+    }
+
+    public void closeHelpToolTip() {
+        lightBarracksTitle.click();
     }
 
 }

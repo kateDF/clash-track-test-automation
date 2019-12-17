@@ -90,4 +90,41 @@ public class TroopCostCalculationTest extends BaseTestData {
         softAssert.assertAll();
     }
 
+    @Test
+    void testOpenHelpToolTip() {
+        logInfo("Verify opening of help tooltip.");
+        homePage.navigate(baseUrl);
+        signInService.signInWithGoogleAccount(user);
+        dashboardPage.openTroopCalculator();
+        troopCostCalculatorPage.openFirstHelpToolTip();
+        softAssert.assertThat(troopCostCalculatorPage.isHelpToolTipPresented())
+                .as("Verify help tooltip presence").isTrue();
+        softAssert.assertAll();
+    }
+
+    @Test
+    void testCloseHelpToolTip() {
+        logInfo("Verify closing of help tooltip.");
+        homePage.navigate(baseUrl);
+        signInService.signInWithGoogleAccount(user);
+        dashboardPage.openTroopCalculator();
+        troopCostCalculatorPage.openFirstHelpToolTip();
+        troopCostCalculatorPage.closeHelpToolTip();
+        softAssert.assertThat(troopCostCalculatorPage.isHelpToolTipPresented())
+                .as("Verify help tooltip presence").isFalse();
+        softAssert.assertAll();
+    }
+
+    @Test
+    void testOpenSaveArmyHelpToolTip() {
+        logInfo("Verify save army help tool tip text.");
+        homePage.navigate(baseUrl);
+        signInService.signInWithGoogleAccount(user);
+        dashboardPage.openTroopCalculator();
+        troopCostCalculatorPage.openSaveArmyHelpToolTip();
+        softAssert.assertThat(troopCostCalculatorPage.getFirstHelpToolTipPresented())
+                .as("Verify help tooltip text").contains("You can save your army compositions for future use");
+        softAssert.assertAll();
+    }
+
 }
