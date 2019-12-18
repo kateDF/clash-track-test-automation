@@ -24,6 +24,10 @@ public class DashboardPage extends BasePage {
     @FindBy(xpath = "//i[@class='fa fa-sliders']/ancestor::a")
     private WebElement troopCalculatorButton;
 
+    @FindBy(xpath = "//i[@class='fa fa-balance-scale']/ancestor::a")
+    private WebElement warWeightCalculatorButton;
+
+
     public String getCurrentUseName() {
         waitForVisibility(currentUserNameTitle);
         String currentUserName = currentUserNameTitle.getText();
@@ -41,6 +45,12 @@ public class DashboardPage extends BasePage {
         openToolsList();
         logInfo("Open troop cost calculator");
         waitVisibilityAndClick(troopCalculatorButton);
+    }
+
+    public void openWarWeightCalculator() {
+        openToolsList();
+        logInfo("Open war weight calculator");
+        waitVisibilityAndClick(warWeightCalculatorButton);
     }
 
     private void openToolsList() {

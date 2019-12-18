@@ -64,6 +64,12 @@ public class ConfigurationContext {
 
     @Bean
     @Scope("prototype")
+    public WarWeightCalculatorPage getWarWeightCalculatorPage() {
+        return new WarWeightCalculatorPage();
+    }
+
+    @Bean
+    @Scope("prototype")
     public SignInService getSignInService() {
         return new SignInService();
     }

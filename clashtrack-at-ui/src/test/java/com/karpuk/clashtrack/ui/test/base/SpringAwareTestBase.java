@@ -28,6 +28,8 @@ public class SpringAwareTestBase extends AbstractTestNGSpringContextTests {
     protected TroopCostCalculatorPage troopCostCalculatorPage;
     @Autowired
     protected BaseLayoutPage baseLayoutPage;
+    @Autowired
+    protected WarWeightCalculatorPage warWeightCalculatorPage;
 
     @Autowired
     protected SignInService signInService;
