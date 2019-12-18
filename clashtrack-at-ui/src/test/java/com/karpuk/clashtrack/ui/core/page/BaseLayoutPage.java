@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.karpuk.clashtrack.core.listener.TestListener.logInfo;
 
@@ -37,11 +36,9 @@ public class BaseLayoutPage extends BasePage {
     }
 
     public boolean matchLevelsOfProposedBases(TownHallLevelsEnum expectedLevelEnum) {
-        List<String> levels = levelsOfProposedBases.stream()
-                .map(level -> level.getText())
-                .collect(Collectors.toList());
         String expectedLevel = expectedLevelEnum.toString();
-        return levels.stream()
+        return levelsOfProposedBases.stream()
+                .map(level -> level.getText())
                 .allMatch(expectedLevel::equalsIgnoreCase);
     }
 
