@@ -9,7 +9,7 @@
     </test>
     <test name="BasesCollectionTest">
         <classes>
-            <class name="com.karpuk.clashtrack.ui.test.BasesCollectionTest"/>
+            <class name="com.karpuk.clashtrack.ui.test.BasesCollectionNoSignInTest"/>
         </classes>
     </test>
     <test name="TroopCostCalculatorTest">

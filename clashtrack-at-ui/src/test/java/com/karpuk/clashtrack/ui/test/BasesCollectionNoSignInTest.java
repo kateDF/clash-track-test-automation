@@ -6,13 +6,12 @@ import org.testng.annotations.Test;
 
 import static com.karpuk.clashtrack.core.listener.TestListener.logInfo;
 
-public class BasesCollectionTest extends BaseTestData {
+public class BasesCollectionNoSignInTest extends BaseTestData {
 
     @Test()
     void testBasesFilteringByTownHall() {
         logInfo("Verify Bases filtering by Town Hall level.");
         homePage.navigate(baseUrl);
-        signInService.signInWithGoogleAccount(user);
         dashboardPage.openBasesCollection();
         basesCollectionPage.selectTownHallLevel(TownHallLevelsEnum.TH9);
         softAssert.assertThat(basesCollectionPage.matchLevelsResults(TownHallLevelsEnum.TH9))
@@ -24,7 +23,6 @@ public class BasesCollectionTest extends BaseTestData {
     void testOpenExactLevelBase() {
         logInfo("Verify level of chosen base layout page.");
         homePage.navigate(baseUrl);
-        signInService.signInWithGoogleAccount(user);
         dashboardPage.openBasesCollection();
         basesCollectionPage.selectTownHallLevel(TownHallLevelsEnum.TH7);
         basesCollectionPage.openFirstBaseLayout();
@@ -37,7 +35,6 @@ public class BasesCollectionTest extends BaseTestData {
     void testReturnToListFromExactBase() {
         logInfo("Verify returning to List of Bases.");
         homePage.navigate(baseUrl);
-        signInService.signInWithGoogleAccount(user);
         dashboardPage.openBasesCollection();
         basesCollectionPage.openFirstBaseLayout();
         baseLayoutPage.backToBasesList();
@@ -50,7 +47,6 @@ public class BasesCollectionTest extends BaseTestData {
     void testCheckTypeOfExactBase() {
         logInfo("Verify base type.");
         homePage.navigate(baseUrl);
-        signInService.signInWithGoogleAccount(user);
         dashboardPage.openBasesCollection();
         String firstBaseType = basesCollectionPage.getFirstBaseType();
         basesCollectionPage.openFirstBaseLayout();
@@ -63,7 +59,6 @@ public class BasesCollectionTest extends BaseTestData {
     void testCheckLevelProposedBases() {
         logInfo("Verify level of chosen base layout page.");
         homePage.navigate(baseUrl);
-        signInService.signInWithGoogleAccount(user);
         dashboardPage.openBasesCollection();
         basesCollectionPage.selectTownHallLevel(TownHallLevelsEnum.TH6);
         basesCollectionPage.openFirstBaseLayout();

@@ -1,0 +1,10 @@
+<suite name="NoSignInSuite" thread-count="1" parallel="tests">
+    <listeners>
+        <listener class-name="com.karpuk.clashtrack.core.listener.TestListener"/>
+    </listeners>
+    <test name="BasesCollectionTest">
+        <classes>
+            <class name="com.karpuk.clashtrack.ui.test.BasesCollectionNoSignInTest"/>
+        </classes>
+    </test>
+</suite>
