@@ -14,7 +14,7 @@ public class WarWeightCalculationTest extends BaseTestData {
     @DataProvider(name = "data-provider-same-gold-amоunt")
     public Object[][] dataSameGoldAmount() {
         return new Object[][]{{TownHallLevelsEnum.TH8, 100000},
-                {TownHallLevelsEnum.TH10, 1111111111},
+                {TownHallLevelsEnum.TH10, 11111111},
                 {TownHallLevelsEnum.TH5, 222}
         };
     }
@@ -25,11 +25,37 @@ public class WarWeightCalculationTest extends BaseTestData {
         homePage.navigate(baseUrl);
         signInService.signInWithGoogleAccount(user);
         dashboardPage.openWarWeightCalculator();
-        warWeightCalculatorPage.selectTownHallLevel(townHallLevel);
-        warWeightCalculatorPage.selectGoldInStorage(1, goldAmount);
-        warWeightCalculatorPage.calculateWarWeight();
-        softAssert.assertThat(warWeightCalculatorPage.getCalculatedWarWeight())
+        warWeightCalculationService.calculateWarWeight(townHallLevel, 1, goldAmount);
+        softAssert.assertThat((double) warWeightCalculatorPage.getCalculatedWarWeight())
                 .as("Verify calculated war weight").isCloseTo(Math.ceil((double) goldAmount * (warWeightCalculatorPage.getNumberOfStorage() + 1) / 1000), Percentage.withPercentage(1));
+        softAssert.assertAll();
+    }
+
+    @Test(dataProvider = "data-provider-same-gold-amоunt")
+    void testCalculatedIncreaseGold(TownHallLevelsEnum townHallLevel, int goldAmount) {
+        logInfo("Verify changing of war weight with increasing gold in storage.");
+        homePage.navigate(baseUrl);
+        signInService.signInWithGoogleAccount(user);
+        dashboardPage.openWarWeightCalculator();
+        warWeightCalculationService.calculateWarWeight(townHallLevel, 1, goldAmount);
+        int goldWithFirstAmount = warWeightCalculatorPage.getCalculatedWarWeight();
+        warWeightCalculatorPage.selectGoldInStorage(1, goldAmount * 2);
+        softAssert.assertThat(goldWithFirstAmount)
+                .as("Verify war weight changing").isLessThanOrEqualTo(warWeightCalculatorPage.getCalculatedWarWeight());
+        softAssert.assertAll();
+    }
+
+    @Test(dataProvider = "data-provider-same-gold-amоunt")
+    void testCalculatedDecreaseGold(TownHallLevelsEnum townHallLevel, int goldAmount) {
+        logInfo("Verify changing of war weight with decreasing gold in storage.");
+        homePage.navigate(baseUrl);
+        signInService.signInWithGoogleAccount(user);
+        dashboardPage.openWarWeightCalculator();
+        warWeightCalculationService.calculateWarWeight(townHallLevel, 1, goldAmount);
+        int goldWithFirstAmount = warWeightCalculatorPage.getCalculatedWarWeight();
+        warWeightCalculatorPage.selectGoldInStorage(1, goldAmount / 2);
+        softAssert.assertThat(goldWithFirstAmount)
+                .as("Verify war weight changing").isGreaterThanOrEqualTo(warWeightCalculatorPage.getCalculatedWarWeight());
         softAssert.assertAll();
     }
 

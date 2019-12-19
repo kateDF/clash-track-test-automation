@@ -6,6 +6,7 @@ import com.karpuk.clashtrack.ui.test.context.AccountsContext;
 import com.karpuk.clashtrack.ui.test.context.ConfigurationContext;
 import com.karpuk.clashtrack.ui.test.service.SignInService;
 import com.karpuk.clashtrack.ui.test.service.TroopCalculationService;
+import com.karpuk.clashtrack.ui.test.service.WarWeightCalculationService;
 import org.assertj.core.api.SoftAssertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,6 +36,8 @@ public class SpringAwareTestBase extends AbstractTestNGSpringContextTests {
     protected SignInService signInService;
     @Autowired
     protected TroopCalculationService troopCalculationService;
+    @Autowired
+    protected WarWeightCalculationService warWeightCalculationService;
 
     @Value("${application.url}${application.url.lang}")
     protected String baseUrl;

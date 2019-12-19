@@ -3,6 +3,7 @@ package com.karpuk.clashtrack.ui.test.service;
 import com.karpuk.clashtrack.ui.core.page.AccountsGooglePage;
 import com.karpuk.clashtrack.ui.core.page.HomePage;
 import com.karpuk.clashtrack.ui.core.page.TroopCostCalculatorPage;
+import com.karpuk.clashtrack.ui.core.page.WarWeightCalculatorPage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class BaseService {
@@ -15,5 +16,8 @@ public class BaseService {
 
     @Autowired
     protected TroopCostCalculatorPage troopCostCalculatorPage;
+
+    @Autowired
+    protected WarWeightCalculatorPage warWeightCalculatorPage;
 
 }

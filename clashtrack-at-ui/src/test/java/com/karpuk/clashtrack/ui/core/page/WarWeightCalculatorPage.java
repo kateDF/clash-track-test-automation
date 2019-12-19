@@ -44,12 +44,12 @@ public class WarWeightCalculatorPage extends BasePage {
     }
 
     public void calculateWarWeight() {
-        logInfo("Start war weight calculation");
+        logInfo("Calculate war weight");
         calculateButton.click();
     }
 
-    public double getCalculatedWarWeight() {
-        return Double.parseDouble(calculatedWeightResult.getText());
+    public int getCalculatedWarWeight() {
+        return Integer.parseInt(calculatedWeightResult.getText());
     }
 
     public int getNumberOfStorage() {

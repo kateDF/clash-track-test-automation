@@ -17,4 +17,9 @@
             <class name="com.karpuk.clashtrack.ui.test.TroopCostCalculationTest"/>
         </classes>
     </test>
+    <test name="WarWeightCalculatorTest">
+        <classes>
+            <class name="com.karpuk.clashtrack.ui.test.WarWeightCalculationTest"/>
+        </classes>
+    </test>
 </suite>

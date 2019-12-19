@@ -3,6 +3,7 @@ package com.karpuk.clashtrack.ui.test.context;
 import com.karpuk.clashtrack.ui.core.page.*;
 import com.karpuk.clashtrack.ui.test.service.SignInService;
 import com.karpuk.clashtrack.ui.test.service.TroopCalculationService;
+import com.karpuk.clashtrack.ui.test.service.WarWeightCalculationService;
 import org.assertj.core.api.SoftAssertions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -78,6 +79,12 @@ public class ConfigurationContext {
     @Scope("prototype")
     public TroopCalculationService getTroopCalculationService() {
         return new TroopCalculationService();
+    }
+
+    @Bean
+    @Scope("prototype")
+    public WarWeightCalculationService getWarWeightCalculationService() {
+        return new WarWeightCalculationService();
     }
 
 }
