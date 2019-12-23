@@ -87,7 +87,7 @@ public class TroopCostCalculatorPage extends BasePage {
     }
 
     public int getAvailableQuantityOfLightBarracks() {
-        return Integer.parseInt(availableQuantityLightBarracks.getText().replace("−", "-"));
+        return Integer.parseInt(availableQuantityLightBarracks.getText().replaceAll("−", "-"));
     }
 
     public String getErrorMessageLightBarracks() {
