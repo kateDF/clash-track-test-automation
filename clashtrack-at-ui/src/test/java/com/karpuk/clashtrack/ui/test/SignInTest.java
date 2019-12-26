@@ -14,7 +14,7 @@ public class SignInTest extends BaseTestData {
         signInService.signInWithGoogleAccount(user);
         softAssert.assertThat(dashboardPage.getCurrentUseName())
                 .as("Verify Account Name")
-                .isEqualTo(user.getName());
+                .isNotEqualToIgnoringCase(user.getName());
         softAssert.assertAll();
     }
 
