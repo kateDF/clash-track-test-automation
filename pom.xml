@@ -11,6 +11,7 @@
     <modules>
         <module>clashtrack-at-core</module>
         <module>clashtrack-at-ui</module>
+        <module>clashtrack-at-api</module>
     </modules>
 
     <properties>
