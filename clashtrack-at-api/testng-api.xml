@@ -1,0 +1,10 @@
+<suite name="ApiTestSuite" thread-count="3" parallel="tests">
+    <listeners>
+        <listener class-name="com.karpuk.clashtrack.core.listener.TestListener"/>
+    </listeners>
+    <test name="ClansSearchApiTests">
+        <classes>
+            <class name="com.karpuk.clashtrack.api.test.ClansSearchTest"/>
+        </classes>
+    </test>
+</suite>
