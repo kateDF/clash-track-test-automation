@@ -33,7 +33,7 @@ public class ClansSearchTest extends SpringAwareTestBaseApi {
         queries.put("minClanLevel", minLevel);
 
         ResponseEntity<ClansSearchResponse> result = clanSearchService.filterClans(queries);
-        softAssert.assertThat(result.getStatusCode().toString()).as("Verify status code").isEqualTo("200 OK");
+        softAssert.assertThat(result.getStatusCodeValue()).as("Verify status code").isEqualTo(200);
 
         List<Clan> resultClans = result.getBody().getItems();
         int expectedLevel = Integer.parseInt(minLevel);
@@ -48,7 +48,7 @@ public class ClansSearchTest extends SpringAwareTestBaseApi {
         queries.put("minClanLevel", "2");
 
         ResponseEntity<ClansSearchResponse> result = clanSearchService.filterClans(queries);
-        softAssert.assertThat(result.getStatusCode().toString()).as("Verify status code").isEqualTo("200 OK");
+        softAssert.assertThat(result.getStatusCodeValue()).as("Verify status code").isEqualTo(200);
 
         List<Clan> resultClans = result.getBody().getItems();
         int expectedNumOfClans = Integer.parseInt(limit);

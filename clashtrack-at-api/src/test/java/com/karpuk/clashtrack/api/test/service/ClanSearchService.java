@@ -16,14 +16,14 @@ import java.util.Map;
 public class ClanSearchService extends BaseService {
 
     public ResponseEntity<ClansSearchResponse> filterClans(Map<String, String> queries) {
-        URI uri = buildUri(restContextHolder.getUrl() + restContextHolder.getClansSearchEndpoint(), queries, null);
+        URI uri = buildUri(restContextHolder.getClansSearchUrl(), queries, null);
         MultiValueMap<String, String> headers = restContextHolder.getDefaultHeaders();
         return restTemplate.exchange(uri, HttpMethod.GET, new HttpEntity<String>(headers), ClansSearchResponse.class);
     }
 
-    public boolean isAllClansHasNotLessLevel(List<Clan> resultClans, int expectedLevel){
-       return resultClans.stream()
-                .mapToInt(clan -> clan.getClanLevel())
+    public boolean isAllClansHasNotLessLevel(List<Clan> resultClans, int expectedLevel) {
+        return resultClans.stream()
+                .mapToInt(Clan::getClanLevel)
                 .allMatch(i -> i >= (expectedLevel));
     }
 

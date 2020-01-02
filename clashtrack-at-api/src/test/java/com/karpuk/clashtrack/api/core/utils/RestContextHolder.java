@@ -4,14 +4,14 @@ import org.springframework.util.MultiValueMap;
 
 public class RestContextHolder {
 
-    private String url;
+    private String urlBase;
     private MultiValueMap<String, String> defaultHeaders;
 
     public RestContextHolder() {
     }
 
-    public RestContextHolder(String url, MultiValueMap<String, String> defaultHeaders) {
-        this.url = url;
+    public RestContextHolder(String urlBase, MultiValueMap<String, String> defaultHeaders) {
+        this.urlBase = urlBase;
         this.defaultHeaders = defaultHeaders;
     }
 
@@ -19,24 +19,16 @@ public class RestContextHolder {
         this.defaultHeaders = defaultHeaders;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public String getUrlBase() {
+        return urlBase;
     }
 
     public MultiValueMap<String, String> getDefaultHeaders() {
         return defaultHeaders;
     }
 
-    public void setDefaultHeaders(MultiValueMap<String, String> defaultHeaders) {
-        this.defaultHeaders = defaultHeaders;
-    }
-
     public String getClansSearchEndpoint() {
-        return "/clans";
+        return urlBase + "/clans";
     }
 
 }
