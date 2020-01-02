@@ -13,10 +13,15 @@ import java.util.Map;
 
 public class ClansSearchTest extends SpringAwareTestBaseApi {
 
-
     @DataProvider(name = "data-provider-min-clan-level")
     public Object[][] dataProviderMinClassLevel() {
         return new Object[][]{{"3"}, {"10"}, {"12"}
+        };
+    }
+
+    @DataProvider(name = "data-provider-incorrect-min-clan-level")
+    public Object[][] dataProviderIncorrectMinClassLevel() {
+        return new Object[][]{{"0"}, {"1"}, {"-10"}
         };
     }
 
@@ -38,6 +43,17 @@ public class ClansSearchTest extends SpringAwareTestBaseApi {
         List<Clan> resultClans = result.getBody().getItems();
         int expectedLevel = Integer.parseInt(minLevel);
         softAssert.assertThat(clanSearchService.isAllClansHasNotLessLevel(resultClans, expectedLevel)).as("Verify levels").isTrue();
+        softAssert.assertAll();
+    }
+
+    @Test(dataProvider = "data-provider-incorrect-min-clan-level")
+    public void testIncorrectFilterByMinClanLevel(String minLevel) {
+        Map<String, String> queries = new HashMap<>();
+        queries.put("minClanLevel", minLevel);
+
+        ResponseEntity result = clanSearchService.filterClans(queries);
+        softAssert.assertThat(result.getStatusCodeValue()).as("Verify status code").isEqualTo(400);
+        softAssert.assertThat(result.getBody().toString()).as("Verify error reason").contains("minClanLevel must be at least 2");
         softAssert.assertAll();
     }
 

@@ -27,7 +27,7 @@ public class RestContextHolder {
         return defaultHeaders;
     }
 
-    public String getClansSearchEndpoint() {
+    public String getClansSearchUrl() {
         return urlBase + "/clans";
     }
 

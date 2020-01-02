@@ -6,6 +6,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -15,10 +16,16 @@ import java.util.Map;
 
 public class ClanSearchService extends BaseService {
 
-    public ResponseEntity<ClansSearchResponse> filterClans(Map<String, String> queries) {
+    public ResponseEntity filterClans(Map<String, String> queries) {
         URI uri = buildUri(restContextHolder.getClansSearchUrl(), queries, null);
         MultiValueMap<String, String> headers = restContextHolder.getDefaultHeaders();
-        return restTemplate.exchange(uri, HttpMethod.GET, new HttpEntity<String>(headers), ClansSearchResponse.class);
+        try {
+            return restTemplate.exchange(uri, HttpMethod.GET, new HttpEntity<String>(headers), ClansSearchResponse.class);
+        } catch (HttpClientErrorException e) {
+            return ResponseEntity
+                    .status(e.getStatusCode())
+                    .body(e.getResponseBodyAsString());
+        }
     }
 
     public boolean isAllClansHasNotLessLevel(List<Clan> resultClans, int expectedLevel) {
