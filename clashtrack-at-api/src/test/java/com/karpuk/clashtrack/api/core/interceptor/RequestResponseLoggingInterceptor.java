@@ -1,11 +1,14 @@
 package com.karpuk.clashtrack.api.core.interceptor;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 
 import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.karpuk.clashtrack.core.listener.TestListener.logInfo;
 
@@ -23,7 +26,7 @@ public class RequestResponseLoggingInterceptor implements ClientHttpRequestInter
         logInfo("=================request begin=================");
         logInfo("URI         : " + request.getURI());
         logInfo("Method      : " + request.getMethod());
-        logInfo("Headers     : " + request.getHeaders());
+        logInfo("Headers     : " + sanitizeHeaders(request.getHeaders()));
         logInfo("=================request end===================");
     }
 
@@ -33,6 +36,19 @@ public class RequestResponseLoggingInterceptor implements ClientHttpRequestInter
         logInfo("Status text  : " + response.getStatusText());
         logInfo("Headers      : " + response.getHeaders());
         logInfo("================response end==================");
+    }
+
+    private Map<String, List<String>> sanitizeHeaders(HttpHeaders headers) {
+        return headers.entrySet().stream()
+                .map(this::maskSecuredHeader)
+                .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+    }
+
+    private Map.Entry<String, List<String>> maskSecuredHeader(Map.Entry<String, List<String>> entry){
+        if(entry.getKey().equalsIgnoreCase("Authorization")){
+            return new AbstractMap.SimpleEntry("Authorization", Arrays.asList("***********"));
+        }
+        return entry;
     }
 
 }
