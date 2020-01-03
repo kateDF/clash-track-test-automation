@@ -10,7 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 @ContextConfiguration(classes = {ConfigurationContext.class})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class SpringAwareTestBaseApi extends AbstractTestNGSpringContextTests {
 
     @Autowired
