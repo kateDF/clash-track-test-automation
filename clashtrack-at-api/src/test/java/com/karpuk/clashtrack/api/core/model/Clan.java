@@ -8,9 +8,9 @@ public class Clan {
     private String tag;
     private String name;
     private String type;
-    private int locationId;
     private int clanLevel;
     private int members;
+    private Location location;
 
     public Clan() {
     }
@@ -43,14 +43,6 @@ public class Clan {
         this.type = type;
     }
 
-    public int getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
-    }
-
     public int getClanLevel() {
         return clanLevel;
     }
@@ -67,6 +59,14 @@ public class Clan {
         this.members = members;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,12 +74,12 @@ public class Clan {
 
         Clan clan = (Clan) o;
 
-        if (locationId != clan.locationId) return false;
         if (clanLevel != clan.clanLevel) return false;
         if (members != clan.members) return false;
         if (tag != null ? !tag.equals(clan.tag) : clan.tag != null) return false;
         if (name != null ? !name.equals(clan.name) : clan.name != null) return false;
-        return type != null ? type.equals(clan.type) : clan.type == null;
+        if (type != null ? !type.equals(clan.type) : clan.type != null) return false;
+        return location != null ? location.equals(clan.location) : clan.location == null;
     }
 
     @Override
@@ -87,9 +87,9 @@ public class Clan {
         int result = tag != null ? tag.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + locationId;
         result = 31 * result + clanLevel;
         result = 31 * result + members;
+        result = 31 * result + (location != null ? location.hashCode() : 0);
         return result;
     }
 
@@ -99,9 +99,9 @@ public class Clan {
                 "tag='" + tag + '\'' +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
-                ", locationId=" + locationId +
                 ", clanLevel=" + clanLevel +
                 ", members=" + members +
+                ", location=" + location +
                 '}';
     }
 
