@@ -28,6 +28,21 @@ public class ClanSearchService extends BaseService {
         }
     }
 
+    public ResponseEntity searchClanByTag(String tag) {
+        Map<String, String> paths = new HashMap<>();
+        paths.put("clanTag", tag);
+        URI uri = buildUri(restContextHolder.getClanRetrieveUrl(), null, paths);
+        MultiValueMap<String, String> headers = restContextHolder.getDefaultHeaders();
+        try {
+            return restTemplate.exchange(uri, HttpMethod.GET, new HttpEntity<String>(headers), Clan.class);
+        } catch (HttpClientErrorException e) {
+            return ResponseEntity
+                    .status(e.getStatusCode())
+                    .body(e.getResponseBodyAsString());
+        }
+    }
+
+
     public boolean isAllClansHasNotLessLevel(List<Clan> resultClans, int expectedLevel) {
         return resultClans.stream()
                 .mapToInt(Clan::getClanLevel)

@@ -31,4 +31,8 @@ public class RestContextHolder {
         return urlBase + "/clans";
     }
 
+    public String getClanRetrieveUrl() {
+        return urlBase + "/clans/{clanTag}";
+    }
+
 }

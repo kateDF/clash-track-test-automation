@@ -2,36 +2,17 @@ package com.karpuk.clashtrack.api.test;
 
 import com.karpuk.clashtrack.api.core.model.Clan;
 import com.karpuk.clashtrack.api.core.model.ClansSearchResponse;
-import com.karpuk.clashtrack.api.test.base.SpringAwareTestBaseApi;
+import com.karpuk.clashtrack.api.test.base.ClansSearchTestData;
 import org.springframework.http.ResponseEntity;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ClansSearchTest extends SpringAwareTestBaseApi {
+public class ClansSearchTest extends ClansSearchTestData {
 
-    @DataProvider(name = "data-provider-min-clan-level")
-    public Object[][] dataProviderMinClassLevel() {
-        return new Object[][]{{"3"}, {"10"}, {"12"}
-        };
-    }
-
-    @DataProvider(name = "data-provider-incorrect-min-clan-level")
-    public Object[][] dataProviderIncorrectMinClassLevel() {
-        return new Object[][]{{"0"}, {"1"}, {"-10"}
-        };
-    }
-
-    @DataProvider(name = "data-provider-limits")
-    public Object[][] dataProviderLimitNumberOfClans() {
-        return new Object[][]{{"100"}, {"1"}, {"0"}
-        };
-    }
-
-    @Test(dataProvider = "data-provider-min-clan-level")
+    @Test(dataProvider = "dp-min-clan-level")
     public void testFilterByMinClanLevel(String minLevel) {
         Map<String, String> queries = new HashMap<>();
         queries.put("limit", "10");
@@ -46,7 +27,7 @@ public class ClansSearchTest extends SpringAwareTestBaseApi {
         softAssert.assertAll();
     }
 
-    @Test(dataProvider = "data-provider-incorrect-min-clan-level")
+    @Test(dataProvider = "dp-incorrect-min-clan-level")
     public void testIncorrectFilterByMinClanLevel(String minLevel) {
         Map<String, String> queries = new HashMap<>();
         queries.put("minClanLevel", minLevel);
@@ -57,7 +38,7 @@ public class ClansSearchTest extends SpringAwareTestBaseApi {
         softAssert.assertAll();
     }
 
-    @Test(dataProvider = "data-provider-limits")
+    @Test(dataProvider = "dp-limits")
     public void testLimitOfItems(String limit) {
         Map<String, String> queries = new HashMap<>();
         queries.put("limit", limit);
@@ -69,6 +50,24 @@ public class ClansSearchTest extends SpringAwareTestBaseApi {
         List<Clan> resultClans = result.getBody().getItems();
         int expectedNumOfClans = Integer.parseInt(limit);
         softAssert.assertThat(resultClans.size()).as("Verify number of result clans").isEqualTo(expectedNumOfClans);
+        softAssert.assertAll();
+    }
+
+    @Test(dataProvider = "dp-valid-clan-tags")
+    public void testSearchClanByTag(String clanTag) {
+        ResponseEntity<Clan> result = clanSearchService.searchClanByTag(clanTag);
+        softAssert.assertThat(result.getStatusCodeValue()).as("Verify status code").isEqualTo(200);
+
+        Clan resultClan = result.getBody();
+        softAssert.assertThat(resultClan.getTag()).as("Verify clan tag").isEqualTo(clanTag);
+        softAssert.assertAll();
+    }
+
+    @Test(dataProvider = "dp-invalid-clan-tags")
+    public void testSearchClanByInvalidTag(String invalidClanTag) {
+        ResponseEntity result = clanSearchService.searchClanByTag(invalidClanTag);
+        softAssert.assertThat(result.getStatusCodeValue()).as("Verify status code").isEqualTo(404);
+        softAssert.assertThat(result.getBody().toString()).as("Verify error reason").contains("notFound");
         softAssert.assertAll();
     }
 
