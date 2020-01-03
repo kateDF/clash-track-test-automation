@@ -10,8 +10,8 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>clashtrack-at-core</module>
-        <module>clashtrack-at-ui</module>
         <module>clashtrack-at-api</module>
+        <module>clashtrack-at-ui</module>
     </modules>
 
     <properties>
