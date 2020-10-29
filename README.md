@@ -5,7 +5,7 @@ Setup ClashTrack on https://www.clashtrack.com/en/war-weight using **google acco
 ##### For running API tests:
 Create authorization token on https://developer.clashofclans.com/
 ## Execution
-####UI tests:
+#### UI tests:
 _(Running from **clashtrack-at-ui** dir)_
 ```
 mvn clean test -Denv=prod -Dclashtrack.ui.user.login=...@gmail.com -Dclashtrack.ui.user.password=... -Dclashtrack.ui.user.name.=...
