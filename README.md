@@ -1,8 +1,8 @@
 # ClashTrack test automation
 ## Prerequisites
-#####For running UI tests:
+##### For running UI tests:
 Setup ClashTrack on https://www.clashtrack.com/en/war-weight using **google account.**
-#####For running API tests:
+##### For running API tests:
 Create authorization token on https://developer.clashofclans.com/
 ## Execution
 ####UI tests:
@@ -14,7 +14,7 @@ For running UI tests without setup user (limited cases):
 ```
 mvn clean test -Denv=prod -DsuiteXmlFile=testng-no-sign-in.xml
 ```
-####API tests:
+#### API tests:
 _(Running from **clashtrack-at-api** dir)_
 ```
 mvn clean test -Denv=prod -Dclash.api.authorization.token=...
